@@ -31,7 +31,14 @@ static NSBundle *mainStoryboardBundle;
 
 + (NSString *)storyboardIdentifierForClass:(Class)theClass;
 {
-    return NSStringFromClass(theClass);
+    NSString *className = NSStringFromClass(theClass);
+    NSArray *swiftClassName = [className componentsSeparatedByString:@"."];
+    
+    if ([swiftClassName count]>0)
+    {
+        className = swiftClassName[1];
+    }
+    return className;
 }
 
 - (id)instantiateViewControllerForClass:(Class)theClass;
